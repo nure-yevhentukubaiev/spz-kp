@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spz_kp", "spz_kp\spz_kp.vcxproj", "{46FAA64F-6FC8-4087-AE43-11B2D86B3440}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "biosview", "biosview\biosview.vcxproj", "{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Debug|x64.ActiveCfg = Debug|x64
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Debug|x64.Build.0 = Debug|x64
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Debug|x86.ActiveCfg = Debug|Win32
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Debug|x86.Build.0 = Debug|Win32
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Release|x64.ActiveCfg = Release|x64
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Release|x64.Build.0 = Release|x64
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Release|x86.ActiveCfg = Release|Win32
-		{46FAA64F-6FC8-4087-AE43-11B2D86B3440}.Release|x86.Build.0 = Release|Win32
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Debug|x64.ActiveCfg = Debug|x64
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Debug|x64.Build.0 = Debug|x64
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Debug|x86.ActiveCfg = Debug|Win32
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Debug|x86.Build.0 = Debug|Win32
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Release|x64.ActiveCfg = Release|x64
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Release|x64.Build.0 = Release|x64
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Release|x86.ActiveCfg = Release|Win32
+		{960CD57B-0F7C-489E-BE40-D7A9A4C7B8FF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
