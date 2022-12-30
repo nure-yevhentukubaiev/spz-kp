@@ -4,22 +4,36 @@
 INT g_argc = 0;
 TCHAR **g_argv = NULL;
 
-LPTSTR lpszAppName = NULL;
-
 VOID app_atstart(VOID)
 {
-	lpszAppName = (LPTSTR)HeapAlloc(
-		GetProcessHeap(),
-		0,
-		sizeof(TCHAR) * (lstrlen(g_argv[0]) + 1)
-	);
-	lstrcpy(lpszAppName, g_argv[0]);
 	atexit(app_atexit);
 	return;
 }
 
 VOID app_atexit(VOID)
 {
-	HeapFree(GetProcessHeap(), 0, lpszAppName);
+	return;
+}
+
+VOID app_error(LPCTSTR lpszErrorAddDesc)
+{
+	DWORD dwErr = GetLastError();
+	LPTSTR lpszErrorDesc = NULL;
+
+	FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER
+		| FORMAT_MESSAGE_FROM_SYSTEM
+		| FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL, dwErr,
+		0, (LPTSTR)&lpszErrorDesc, 0,
+		NULL
+	);
+	
+	if (dwErr)
+		std::wcerr << _T("Error: ") << lpszErrorDesc << _T("\n");
+	if (lpszErrorAddDesc)
+		std::wcerr << _T("Description: ") << lpszErrorAddDesc << _T("\n");
+
+	LocalFree(lpszErrorDesc);
 	return;
 }

@@ -8,3 +8,5 @@ extern LPTSTR lpszAppName;
 VOID app_atstart(VOID);
 
 VOID app_atexit(VOID);
+
+VOID app_error(LPCTSTR lpszErrorDesc);

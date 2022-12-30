@@ -13,5 +13,6 @@ INT _tmain(INT argc, TCHAR **argv)
 	g_argv = argv;
 	app_atstart();
 
+	
 	return cmd_main();
 }
