@@ -139,12 +139,14 @@
     <ClCompile Include="cmd.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="smbios_raw.cpp" />
+    <ClCompile Include="smbios_wmi.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
     <ClInclude Include="cmd.h" />
     <ClInclude Include="smbios_raw.h" />
+    <ClInclude Include="smbios_wmi.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

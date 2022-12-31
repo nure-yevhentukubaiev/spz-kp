@@ -15,6 +15,3 @@ typedef struct tagRawSMBIOSData
 	DWORD   Length;
 	BYTE    SMBIOSTableData[];
 } RawSMBIOSData;
-
-BOOL GetRawSMBIOS(RawSMBIOSData *smbios);
-BOOL OutRawSMBIOS(RawSMBIOSData *smbios);

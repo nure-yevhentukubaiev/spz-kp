@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "app.h"
 #include "smbios_raw.h"
+#include "smbios_wmi.h"
 
 static VOID cmd_help(VOID)
 {
@@ -14,12 +15,16 @@ static VOID cmd_help(VOID)
 		<< _T("\t-r       Output raw SMBIOS table") << _T("\n")
 		<< _T("\t-s       Show structured SMBIOS view") << _T("\n")
 		<< _T("\t-w       Show Win32_BIOS WMI class view") << _T("\n")
-		<< _T("-- \n");
+		<< _T("\0");
 	return;
 }
 
 static VOID cmd_get_from_wmi(VOID)
 {
+	CoInit();
+	WMIConnect();
+	GetSMBIOSFromWMI();
+	WMIClose();
 	return;
 }
 
@@ -27,7 +32,7 @@ static BOOL cmd_get_raw(VOID)
 {
 	RawSMBIOSData *smbios;
 	/*
-	 * Retrieving SMBIOS table needed buffer size
+	 * Retrieving SMBIOS table needed buffer size, if any table is present
 	 */
 	DWORD dwSMBIOSSize = GetSystemFirmwareTable('RSMB', 0, NULL, 0);
 	BOOL bRet = FALSE;
@@ -69,10 +74,11 @@ static VOID cmd_get_structured(VOID)
 INT cmd_main(VOID)
 {
 	if (g_argc == 1) {
+		app_error(_T("Specify at least one flag."));
 		cmd_help();
 		return 1;
 	}
-	for (UINT i = 1; i < g_argc; ++i) {
+	for (INT i = 1; i < g_argc; ++i) {
 		switch ((g_argv[i])[1]) {
 		case _T('h'):
 		case _T('?'):
@@ -84,6 +90,7 @@ INT cmd_main(VOID)
 		case _T('s'):
 			return 0;
 		case _T('w'):
+			cmd_get_from_wmi();
 			return 0;
 		default:
 			return 2;

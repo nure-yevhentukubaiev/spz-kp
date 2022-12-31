@@ -30,9 +30,9 @@ VOID app_error(LPCTSTR lpszErrorAddDesc)
 	);
 	
 	if (dwErr)
-		std::wcerr << _T("Error: ") << lpszErrorDesc << _T("\n");
+		std::wcerr << _T("Windows error: ") << lpszErrorDesc << _T("\n");
 	if (lpszErrorAddDesc)
-		std::wcerr << _T("Description: ") << lpszErrorAddDesc << _T("\n");
+		std::wcerr << _T("Error: ") << lpszErrorAddDesc << _T("\n");
 
 	LocalFree(lpszErrorDesc);
 	return;
