@@ -6,6 +6,8 @@
 #pragma once
 #include "stdafx.h"
 
+#define MKSMBIOSVERSION(major, minor) (WORD)((major << 8) | (minor))
+
 typedef struct tagRawSMBIOSData
 {
 	BYTE    Used20CallingMethod;
@@ -15,3 +17,7 @@ typedef struct tagRawSMBIOSData
 	DWORD   Length;
 	BYTE    SMBIOSTableData[];
 } RawSMBIOSData;
+
+VOID OutSMBIOSVersion(CONST RawSMBIOSData *smbios);
+
+BOOL GetRawSMBIOS(RawSMBIOSData **smbios);

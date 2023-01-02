@@ -1,12 +1,16 @@
 #include "stdafx.h"
 #include "app.h"
+#include "smbios_raw.h"
 
 INT g_argc = 0;
 TCHAR **g_argv = NULL;
 
+WORD g_SMBIOSVersion = 0;
+
 VOID app_atstart(VOID)
 {
 	atexit(app_atexit);
+
 	return;
 }
 
@@ -30,7 +34,7 @@ VOID app_error(LPCTSTR lpszErrorAddDesc)
 	);
 	
 	if (dwErr)
-		std::wcerr << _T("Windows error: ") << lpszErrorDesc << _T("\n");
+		std::wcerr << _T("Windows error ") << dwErr << _T(": ") << lpszErrorDesc << _T("\n");
 	if (lpszErrorAddDesc)
 		std::wcerr << _T("Error: ") << lpszErrorAddDesc << _T("\n");
 

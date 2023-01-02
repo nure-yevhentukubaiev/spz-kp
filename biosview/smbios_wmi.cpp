@@ -11,6 +11,8 @@ static LPCTSTR taskProps[] = {
 	_T("Manufacturer"),
 	_T("Name"),
 	_T("Version"),
+	_T("SerialNumber"),
+	_T("SMBIOSBIOSVersion"),
 	NULL
 };
 

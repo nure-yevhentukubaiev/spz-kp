@@ -3,6 +3,7 @@
 #include "app.h"
 #include "smbios_raw.h"
 #include "smbios_wmi.h"
+#include "smbios_struct.h"
 
 static VOID cmd_help(VOID)
 {
@@ -31,43 +32,36 @@ static VOID cmd_get_from_wmi(VOID)
 static BOOL cmd_get_raw(VOID)
 {
 	RawSMBIOSData *smbios;
-	/*
-	 * Retrieving SMBIOS table needed buffer size, if any table is present
-	 */
-	DWORD dwSMBIOSSize = GetSystemFirmwareTable('RSMB', 0, NULL, 0);
 	BOOL bRet = FALSE;
-	if (dwSMBIOSSize == 0) {
-		app_error(_T("Seems like SMBIOS is not supported on this system"));
+	if (!GetRawSMBIOS(&smbios)) {
 		goto done;
 	}
 
-	smbios = (RawSMBIOSData *)HeapAlloc(
-		GetProcessHeap(),
-		0,
-		dwSMBIOSSize
-	);
-
-	/*
-	 * Checking if buffer is sufficient enough &
-	 * retrieving SMBIOS table
-	 */
-	if (dwSMBIOSSize != GetSystemFirmwareTable('RSMB', 0, smbios, dwSMBIOSSize)) {
-		app_error(NULL);
-		goto done;
-	}
-
-	std::cout.flush();
 	/* Finally, write to stdout */
 	std::cout.write((CONST CCHAR *)(smbios), smbios->Length);
 
-	HeapFree(GetProcessHeap(), 0, smbios);
+	
+	bRet = TRUE;
 	done:
+	HeapFree(GetProcessHeap(), 0, smbios);
 	return bRet;
 }
 
 static VOID cmd_get_structured(VOID)
 {
+	RawSMBIOSData *smbios;
+	GetRawSMBIOS(&smbios);
 	
+	OutSMBIOSVersion(smbios);
+
+	SMBIOS_Type0 a; 
+	a.Table = (SMBIOS_Type0_Raw *)smbios->SMBIOSTableData;
+	GetSMBIOSStrings((SMBIOS_BaseStruct *)&a);
+	
+	OutSMBIOSStruct_Type0(&a);
+
+	HeapFree(GetProcessHeap(), 0, a.Strings);
+	HeapFree(GetProcessHeap(), 0, smbios);
 	return;
 }
 
@@ -88,11 +82,14 @@ INT cmd_main(VOID)
 			cmd_get_raw();
 			return 0;
 		case _T('s'):
+			cmd_get_structured();
 			return 0;
 		case _T('w'):
 			cmd_get_from_wmi();
 			return 0;
 		default:
+			app_error(_T("Invalid flag."));
+			cmd_help();
 			return 2;
 		}
 	}
